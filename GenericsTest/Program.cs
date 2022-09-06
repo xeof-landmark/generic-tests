@@ -14,15 +14,8 @@ namespace GenericsTest
             var map = new Map();
 
             var unitsComparables = InitializeComparables();
-            var unitsNonComparables = InitializeNonComparables();
 
-
-            var unitsMappedCompared = map.MapList(unitsComparables);
-            var unitsMappedNonCompared = map.MapList(unitsNonComparables);
-
-            var units = new List<IUnit>();
-            units.AddRange(unitsMappedCompared);
-            units.AddRange(unitsMappedNonCompared);
+            var units = map.MapList(unitsComparables);
 
             foreach (var unit in units)
             {
@@ -31,22 +24,15 @@ namespace GenericsTest
             }
         }
 
-        static List<Comparable<IUnit>> InitializeComparables()
+        static List<IComparable<IUnit>> InitializeComparables()
         {
-            return new List<Comparable<IUnit>>()
+            return new List<IComparable<IUnit>>()
             {
                 new Comparable<IUnit> { Unit = fixture.Create<LegacyUnit>() },
                 new Comparable<IUnit> { Unit = fixture.Create<LegacyUnit>() },
                 new Comparable<IUnit> { Unit = fixture.Create<LegacyUnit>() },
                 new Comparable<IUnit> { Unit = fixture.Create<SaleUnit>() },
                 new Comparable<IUnit> { Unit = fixture.Create<SaleUnit>() },
-            };
-        }
-
-        static List<NonComparable<IUnit>> InitializeNonComparables()
-        {
-            return new List<NonComparable<IUnit>>()
-            {
                 new NonComparable<IUnit> { Unit = fixture.Create<LegacyUnit>() },
                 new NonComparable<IUnit> { Unit = fixture.Create<LegacyUnit>() },
                 new NonComparable<IUnit> { Unit = fixture.Create<LegacyUnit>() },
